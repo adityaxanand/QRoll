@@ -39,7 +39,7 @@ QRoll is a modern, secure, and easy-to-use mobile application that simplifies th
 
 ## Contact
 
-For any questions or suggestions regarding qroll, please contact us at [qroll@gmail.com](mailto:qroll@gmail.com).
+For any questions or suggestions regarding qroll, please contact us at [qroll.mail@gmail.com](mailto:qroll.mail@gmail.com).
 
 ## Contributing
 

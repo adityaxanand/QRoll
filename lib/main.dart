@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/introduction_screen_1.dart';
+import 'screens/introduction_screen_2.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: IntroductionScreen1(),
+      routes: {
+        '/location': (context) => IntroductionScreen1(),
+      },
     );
   }
 }

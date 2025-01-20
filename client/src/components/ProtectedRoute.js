@@ -2,7 +2,8 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const token = localStorage.getItem('token');  // Get JWT from localStorage
+  const token = localStorage.getItem('token');
+  console.log('Token:', token);
 
   return (
     <Route
@@ -17,5 +18,6 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     />
   );
 };
+
 
 export default ProtectedRoute;

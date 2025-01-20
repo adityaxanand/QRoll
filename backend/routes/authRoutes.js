@@ -31,25 +31,21 @@ router.post('/signup', async (req, res) => {
 });
 
 // Login route
-router.post('/api/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  // Find user by email
   const user = await User.findOne({ email });
-  if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+  if (!user) {
+    return res.status(400).json({ message: 'Invalid credentials' });
+  }
 
-  // Check password (Assuming you use bcrypt for password hashing)
   const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+  if (!isMatch) {
+    return res.status(400).json({ message: 'Invalid credentials' });
+  }
 
-  // Create a JWT token including the user's name
-  const token = jwt.sign(
-    { userId: user._id, username: user.name }, // Include the name in the token
-    process.env.JWT_SECRET,
-    { expiresIn: '1h' }
-  );
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-  // Send the token back to the client
   res.json({ token });
 });
 

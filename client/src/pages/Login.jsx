@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import jwt_decode from 'jwt-decode'; // You'll need to install this: `npm install jwt-decode`
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,13 +21,7 @@ const Login = () => {
       console.log('Response:', data);
   
       if (response.ok) {
-        // Store JWT in localStorage
         localStorage.setItem('token', data.token);
-
-        // Decode JWT to get the username
-        const decoded = jwt_decode(data.token);
-        localStorage.setItem('username', decoded.username);  // Store username in localStorage
-        
         console.log('Login successful! Redirecting...');
         history.push('/protected');
       } else {
@@ -40,6 +33,7 @@ const Login = () => {
       alert('An error occurred. Please try again.');
     }
   };
+  
 
   return (
     <div>

@@ -1,27 +1,22 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Protected from './pages/Protected';
-import './App.css';
+import ProtectedRoute from './components/ProtectedRoute';
 
-function App() {
-  const [token, setToken] = useState(localStorage.getItem('token'));
-
+const App = () => {
   return (
     <Router>
-      <nav>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
-        {token && <Link to="/protected">Protected</Link>}
-      </nav>
-      <Routes>
-        <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/protected" element={<Protected token={token} />} />
-      </Routes>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        
+        {/* Protected Route */}
+        <ProtectedRoute path="/protected" component={Protected} />
+      </Switch>
     </Router>
   );
-}
+};
 
 export default App;

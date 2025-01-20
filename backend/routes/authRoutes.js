@@ -31,7 +31,7 @@ router.post('/signup', async (req, res) => {
 });
 
 // Login route
-app.post('/api/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
   // Find user by email

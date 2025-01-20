@@ -8,22 +8,32 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-
-    const data = await response.json();
-
-    if (data.token) {
-      localStorage.setItem('token', data.token);
-      history.push('/protected');
-    } else {
-      alert('Invalid credentials');
+    console.log('Submitting login...');
+  
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      const data = await response.json();
+      console.log('Response:', data);
+  
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        console.log('Login successful! Redirecting...');
+        history.push('/protected');
+      } else {
+        console.error('Error:', data.message);
+        alert(data.message || 'Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+      alert('An error occurred. Please try again.');
     }
   };
+  
 
   return (
     <div>
